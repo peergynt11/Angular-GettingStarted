@@ -1,0 +1,17 @@
+
+All mobiles from WebService:
+<br><br>
+{{mobiles}}
+<br>
+<br>
+<div class='col-md-7'>
+  Show one mobile:<br>
+  <input type='text' [(ngModel)]='mobileId' />
+<br>
+</div>
+<br>
+<!-- <button class='btn btn-primary' (click)='showMobile()'>Show</button> -->
+<pm-mobile-detail 
+[fromContainer]='mobileId'
+(toContainer)=onToContainer($event)></pm-mobile-detail>
+

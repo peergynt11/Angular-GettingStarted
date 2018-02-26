@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MobileService } from '../mobile.service';
 
@@ -9,8 +9,10 @@ import { MobileService } from '../mobile.service';
 })
 export class MobileDetailComponent implements OnInit {
 
-  mobileName: String;
-
+  mobileName: string;
+  @Input() fromContainer: String;
+  @Output() toContainer: EventEmitter<string> = new EventEmitter<string>();
+  
   constructor(private _route: ActivatedRoute, private _mobileService: MobileService, private _router: Router) { }
 
 
@@ -19,11 +21,28 @@ export class MobileDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    let id = this._route.snapshot.paramMap.get('id');
-    this._mobileService.getSingleMobile(id)
-      .subscribe(
-                telefon => this.mobileName=JSON.stringify(telefon)
-      );
-      console.log('MOBILNAME: ' + this.mobileName);
-    }
+  }
+ 
+  showSingleMobile() {
+      let id = this.fromContainer
+      //   let id = this._route.snapshot.paramMap.get('id');
+        this._mobileService.getSingleMobile(this.fromContainer)
+        .subscribe(
+                  telefon => this.mobileName=JSON.stringify(telefon)
+        );
+        this.toContainer.emit('MOBILNAME: '+this.mobileName);    
+  }
+
+  // showSingleMobile() {
+    //   let id = this.fromContainer
+    //   console.log('ID from Container: ' + this.fromContainer);
+
+    //   //   let id = this._route.snapshot.paramMap.get('id');
+    //   this._mobileService.getSingleMobile(this.fromContainer)
+    //     .subscribe(
+    //               telefon => this.mobileName=JSON.stringify(telefon)
+    //     );
+    //     console.log('MOBILNAME: ' + this.mobileName);
+    //     this.toContainer.emit('MOBILNAME: '+this.mobileName);
+    //   }   
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IMobile } from './mobile'
-import { MobileService } from './mobile.service';
+import { IMobile } from './../mobile'
+import { MobileService } from './../mobile.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,9 +10,11 @@ import { Router } from '@angular/router';
 })
 export class MobileListComponent implements OnInit {
 
+  toNested: string = 'Das ist einer Variable vom Container';
+  fromNested: string; 
   mobiles: string;
   errorMessage: string;
-  _mobileId: string;
+  _mobileId: string;  
 
   constructor( private _mobileService: MobileService, private _router: Router ) {  }
 
@@ -22,7 +24,6 @@ export class MobileListComponent implements OnInit {
 
   set mobileId(value: string ) {
     this._mobileId = value; 
-    console.log('MOBILE-ID: '+this._mobileId)
   }   
 
   showMobile() {
@@ -36,7 +37,11 @@ export class MobileListComponent implements OnInit {
           telefone => this.mobiles=JSON.stringify(telefone),
           error    => this.errorMessage=<any>error
     );
-    console.log( 'Completed: this._mobileService.getMobiles()' );
+  }
+
+  onToContainer(message: string): void   {
+    console.log('Received event from mobile-detail.component: '+message )
+    this.fromNested = message;
   }
 
 }

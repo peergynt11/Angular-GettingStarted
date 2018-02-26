@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MobileListComponent } from './mobile-list.component';
+import { MobileListComponent } from './mobile-list/mobile-list.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MobileService } from './mobile.service';
@@ -13,7 +13,7 @@ import { MobileDetailComponent } from './mobile-detail/mobile-detail.component';
     ]),
     SharedModule,
   ],
-    declarations: [MobileListComponent, MobileDetailComponent],
+    declarations: [MobileDetailComponent, MobileListComponent],
     providers: [MobileService]
 })
 
