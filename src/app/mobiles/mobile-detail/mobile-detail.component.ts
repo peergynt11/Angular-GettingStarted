@@ -30,7 +30,9 @@ export class MobileDetailComponent implements OnInit {
         .subscribe(
                   telefon => this.mobileName=JSON.stringify(telefon)
         );
-        this.toContainer.emit('MOBILNAME: '+this.mobileName);    
+        if (this.mobileName) {
+          this.toContainer.emit('MOBILNAME: '+this.mobileName);          
+        }
   }
 
   // showSingleMobile() {
