@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,  FormBuilder } from '@angular/forms';
+import { FormGroup,  FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Form2 } from './form2';
+
+
+function ratingRange(c: AbstractControl): {[key: string]: boolean} | null {
+  if(c.value!= undefined && (isNaN(c.value) ||c.value < 1|| c.value > 5)){
+    return{ 'range' : true};
+  };
+  return null;
+};
 
 @Component({
   selector: 'pm-form2',
@@ -16,19 +24,16 @@ export class Form2Component implements OnInit {
 
     ngOnInit(): void {
       this.form2Group=this.fb.group({
-        firstName:{value: 'xxx', disabled: false},
+        firstName:['xxx', 
+                  [Validators.required, Validators.minLength(3)]
+                ],
         lastName:'',
+        phone: '',
+        notification: 'email',
+        rating: ['', ratingRange],
         sendCatalog: {value: true, disabled: true}
       })
     }
-
-  // ngOnInit(): void {
-  //   console.log('ngOnInit Form2')
-  //   this.form2Group = new FormGroup({
-  //     firstName: new FormControl(),
-  //     lastName: new FormControl()
-  //   })
-  // }
 
   populateTestData(): void {
     this.form2Group.patchValue({
@@ -46,6 +51,16 @@ export class Form2Component implements OnInit {
   save(): void {
     console.log(this.form2Group);
     console.log('Saved: ' + JSON.stringify(this.form2Group.value))
+  }
+
+  setNotification(notifyVia: string): void {
+    const phoneControl=this.form2Group.get('phone');
+    if (notifyVia === 'text') {
+      phoneControl.setValidators(Validators.required);
+    } else {
+      phoneControl.clearValidators();
+    }
+    phoneControl.updateValueAndValidity();
   }
 
 }
