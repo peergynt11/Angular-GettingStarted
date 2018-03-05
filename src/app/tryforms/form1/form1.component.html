@@ -21,7 +21,7 @@
                             placeholder="First Name (required)" 
                             required 
                             minlength="3"
-                            [(ngModel)]=firstName
+                            ngModel
                             name="firstName"
                             #fNVar="ngModel"
                             />
@@ -34,6 +34,22 @@
                         The first name must be longer than 3 characters.
                     </span>
                 </span>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="deptId">Department</label>
+                <div class="col-md-8">
+                    <select 
+                        name="dept" 
+                        [(ngModel)]="dept"
+                        placeholder="Department (required)" 
+                        required 
+                        (change)="onChangeDept()">
+                            <option *ngFor="let x of departments" [ngValue]="x.abbrev">
+                            {{ x.name }}
+                            </option>
+                    </select>
+                </div>
             </div>
 
             <div class="form-group">

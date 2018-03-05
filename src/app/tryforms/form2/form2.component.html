@@ -58,14 +58,14 @@
                         <label class="radio-inline">
                             <input type="radio" 
                                   value="email" 
-                                  formControlName = "notification"
-                                  (click)="setNotification('email')">Email
+                                  formControlName = "notification">
+                                  Email
                                 </label>
                         <label class="radio-inline">
                             <input type="radio" 
                                   value="text" 
-                                  formControlName = "notification"
-                                  (click)="setNotification('text')">Text
+                                  formControlName = "notification">
+                                  Text
                                 </label>
                 </div>
             </div>
@@ -101,6 +101,19 @@
                       Send me your catalog
                   </label>
               </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="phoneId">Select Box</label>
+                  <div class="col-md-8">
+                    <select 
+                        formControlName="dept" 
+                        (change)="onChangeDept()">
+                            <option *ngFor="let x of departments" [ngValue]="x.abbrev">
+                            {{ x.name }}
+                            </option>
+                    </select>
+                  </div>
             </div>
 
             <div class="form-group">

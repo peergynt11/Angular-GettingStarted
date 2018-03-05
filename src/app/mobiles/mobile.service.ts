@@ -24,7 +24,6 @@ export class MobileService {
     let url = this._singlemobileUrl + id;
     // console.log('URL: '+url);
     return this._http.get<any>(url)
-      .pipe()
       .do(data => console.log('DoData: '+JSON.stringify(data)))
       .catch(this.handleError)
   }

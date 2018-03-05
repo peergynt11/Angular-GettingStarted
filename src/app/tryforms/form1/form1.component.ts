@@ -8,8 +8,16 @@ import { NgForm } from '@angular/forms';
 })
 export class Form1Component implements OnInit {
 
-  _firstName: string;
+  departments = [
+    {name: 'Arizona', abbrev: 'AZ'},
+    {name: 'California', abbrev: 'CA'},
+    {name: 'Colorado', abbrev: 'CO'},
+    {name: 'New York', abbrev: 'NY'},
+    {name: 'Pennsylvania', abbrev: 'PA'},
+  ];
 
+  _firstName: string;
+  _dept: string;
   constructor() {
   }
 
@@ -21,13 +29,35 @@ export class Form1Component implements OnInit {
     this._firstName = value; 
   }   
 
+
+  set dept(value) {
+    this._dept=value;
+  }
+
+  get dept(): string {
+    return this._dept
+  }
+
   ngOnInit() {
     console.log('ngOnInit Form1 Component');
   }
 
+
+  onChangeDept(): void {
+    console.log(this.dept);
+  }
+
   save(form1: NgForm): void {
     console.log(form1.form)
-    
+    console.log(form1.value)
   }
+
+
+
+
+
+
+
+
 
 }
