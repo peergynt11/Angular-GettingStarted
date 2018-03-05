@@ -13,7 +13,7 @@
 
             <div class="form-group"
                 [ngClass]="{'has-error': (fNVar.touched || fNVar.dirty) && !fNVar.valid }">
-                <label class="col-md-2 control-label" for="firstNameId">First Name</label>
+                <label data-toggle="tooltip" title="First Name" class="col-md-2 control-label" for="firstNameId">First Name</label>
                 <div class="col-md-8">
                     <input class="form-control" 
                             id="firstNameId" 
@@ -66,7 +66,6 @@
         </fieldset>
     </form>
   </div>
-
   <div class="panel-footer">
     <br>FirstName: {{firstName}}
     <br>Dirty:{{form1.dirty}}
@@ -74,5 +73,38 @@
     <br>Touched:{{form1.touched}}
     <br>Valid:{{form1.valid}}    
     <br>Value::{{form1.value |json}}
-    </div>
 </div>
+
+    <!-- Start Modaler Dialog fuer Grid-Parameter -->
+
+    <div class="container">
+            <h2>Basic Modal Example</h2>
+
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+          
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+    </div>
+    <!-- Ende Modaler Dialog  -->
+
+</div>
+
