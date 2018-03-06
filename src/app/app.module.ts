@@ -18,7 +18,8 @@ import { NgxBootstrapModule } from './shared/ngx-bootstrap/ngx-bootstrap.module'
     AppComponent,
     WelcomeComponent,
     Form1Component,
-    Form2Component
+    Form2Component,
+    Form3Component,
   ],
   imports: [
     FormsModule,
