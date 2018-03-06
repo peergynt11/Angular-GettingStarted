@@ -15,7 +15,7 @@ export class Form3Component implements OnInit {
   ngOnInit() {
   }
 
-  openModal(template: TemplateRef<any>): void {
+  openModal(template: TemplateRef): void {
     this.modalRef = this.modalService.show(template)
   }
 
