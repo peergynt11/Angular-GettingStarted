@@ -10,6 +10,7 @@ export class AppComponent {
   
   title = 'Angular von BV: Getting Started';
 
+
   menuItems = [
     {form: 'form1', formDesc: 'Template Form'},
     {form: 'form2', formDesc: 'Reactive Form'},
