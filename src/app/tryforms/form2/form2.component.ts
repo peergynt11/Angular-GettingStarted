@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,  FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormGroup,  FormBuilder, Validators, AbstractControl, ValidatorFn, MinLengthValidator } from '@angular/forms';
 import { Form2 } from './form2';
+import 'rxjs/add/operator/debounceTime';
 
 
 function ratingRange1(c: AbstractControl): {[key: string]: boolean} | null {
@@ -35,9 +36,16 @@ export class Form2Component implements OnInit {
     {name: 'New York', abbrev: 'NY'},
     {name: 'Pennsylvania', abbrev: 'PA'},
   ];
-  //  form2: Form2 = new Form2()
-
-  constructor( private fb: FormBuilder ) {}
+  
+  firstNameErrorMessage: string;
+  
+  private validationMessages = {
+    'required': 'Please enster your first Name.',
+    'minlength': 'PLease min 3 chars'
+  };    
+   
+  constructor( private fb: FormBuilder ) {
+  }
 
     ngOnInit(): void {
       this.form2Group=this.fb.group({
@@ -52,9 +60,20 @@ export class Form2Component implements OnInit {
         dept: [this.departments[0], Validators.required]
       })
 
-      this.form2Group.get('notification').valueChanges
-                .subscribe( value => this.setNotification(value) );
+      this.form2Group.get('notification').valueChanges.subscribe( value => this.setNotification(value) );
+
+      const firstName = this.form2Group.get('firstName');
+      firstName.valueChanges.debounceTime(1500).subscribe(value => this.setMessage(firstName));
+
+    }
+
+    setMessage(c: AbstractControl): void {
+      this.firstNameErrorMessage = '';
+      if ((c.touched || c.dirty) && c.errors) {
+          this.firstNameErrorMessage = Object.keys(c.errors).map(key =>
+              this.validationMessages[key]).join(' ');
       }
+    }
 
   populateTestData(): void {
     this.form2Group.patchValue({

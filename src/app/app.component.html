@@ -11,9 +11,14 @@
                 <li><a [routerLink]="['/welcome']">Home</a></li>
                 <li><a [routerLink]="['/products']">Product List</a></li>
                 <li><a [routerLink]="['/mobiles']">Mobile List</a></li>
-                <li><a [routerLink]="['/form1']">Template Form</a></li>
-                <li><a [routerLink]="['/form2']">Reactive Form</a></li>
-                <li><a [routerLink]="['/form3']">ngx-bootstrap</a></li>
+                <span dropdown (onShown)="showIt()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()">
+                    <a dropdownToggle (click)="false" >Forms<span class="caret"></span></a>
+                    <ul *dropdownMenu class="dropdown-menu">
+                        <li *ngFor="let choice of menuItems">
+                                <a  [routerLink]="'/'+ choice.form">{{choice.formDesc}}</a>
+                        </li>
+                    </ul>
+                </span>
             </ul>
         </div>
     </nav>
